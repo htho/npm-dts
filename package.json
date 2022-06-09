@@ -1,5 +1,5 @@
 {
-  "name": "@hth/npm-dts",
+  "name": "@htho/npm-dts",
   "version": "1.4.0",
   "description": "Simple DTS single-file generation utility for TypeScript bundles",
   "main": "dist/index.js",
