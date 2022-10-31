@@ -1,10 +1,22 @@
-# npm-dts
+# npm-dts (fork)
 
 This utility generates single _index.d.ts_ file for whole NPM package.
 
 It allows creating bundled _NPM_ library packages without _TypeScript_ sources and yet still keeping code suggestions wherever these libraries are imported.
 
 _TypeScript_ picks up _index.d.ts_ automatically.
+
+## About This Fork
+
+This fork includes the `--customAlias` and the `--shake` options.
+They will hopefully be included in the original some time.
+
+The most recent (but experimental) addition is also copy existing d.ts files,
+which may be included in the source. This is useful, when there are d.ts files
+that describe the API of a .js file in your code base.
+
+Unfortunately there is no way to include ambient declarations in the bundle.
+A d.ts file that has no exports will have no effects.
 
 ---
 
