@@ -1,5 +1,5 @@
 {
-  "name": "npm-dts",
+  "name": "@htho/npm-dts",
   "version": "1.5.0",
   "description": "Simple DTS single-file generation utility for TypeScript bundles",
   "main": "dist/index.js",
@@ -18,13 +18,13 @@
     "exec": "node ./cli.js generate",
     "fix": "node ./scripts/fixCliLineEndings.js"
   },
-  "homepage": "https://github.com/vytenisu/npm-dts",
+  "homepage": "https://github.com/htho/npm-dts",
   "bugs": {
-    "url": "https://github.com/vytenisu/npm-dts/issues"
+    "url": "https://github.com/htho/npm-dts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vytenisu/npm-dts.git"
+    "url": "https://github.com/htho/npm-dts.git"
   },
   "keywords": [
     "NPM",
