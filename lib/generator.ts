@@ -14,6 +14,7 @@ import {
 } from './cli'
 import {debug, ELogLevel, error, info, init, verbose, warn} from './log'
 import * as fs from 'fs'
+import * as copyfiles from 'copyfiles'
 
 const MKDIR_RETRIES = 5
 
@@ -183,7 +184,7 @@ export class Generator extends Cli {
    * Launches generation of typings
    */
   private async _generate() {
-    await this.generateTypings()
+    await this.gatherTypings()
     this.mapTypingsToModules()
     await this.clearTypings()
 
@@ -339,12 +340,16 @@ export class Generator extends Cli {
     })
   }
 
+  private async gatherTypings() {
+    await this.resetCacheDir()
+    await this.copyTypings()
+    await this.generateTypings()
+  }
+
   /**
    * Generates per-file typings using TSC
    */
   private async generateTypings() {
-    await this.resetCacheDir()
-
     verbose('Generating per-file typings using TSC...')
 
     const tscOptions = this.getArgument(ECliArgument.tsc) as string
@@ -394,6 +399,20 @@ export class Generator extends Cli {
     }
 
     verbose('Per-file typings have been generated using TSC!')
+  }
+
+  /**
+   * Copies existing .d.ts files from project
+   */
+  private async copyTypings() {
+    const root = './'
+    const src = `${root}/**/*.d.ts`
+    const dst = relative(root, this.getTempDir())
+    verbose(`Copying existing .d.ts files from... ${src} to ${dst}`)
+    await new Promise<void>((done, fail) =>
+      copyfiles([src, dst], {up: 0}, err => (err ? fail(err) : done())),
+    )
+    verbose('Existing .d.ts files have been copied!')
   }
 
   /**
